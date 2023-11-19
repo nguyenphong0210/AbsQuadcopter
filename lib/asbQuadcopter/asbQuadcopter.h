@@ -285,7 +285,7 @@ typedef struct {
 
 /* Block signals and states (default storage) for system '<Root>' */
 typedef struct {
-  // MdlrefDW_nonlinearAirframe_T NonlinearAirframe_InstanceData;/* '<S1>/Nonlinear Airframe' */
+  MdlrefDW_nonlinearAirframe_T NonlinearAirframe_InstanceData;/* '<S1>/Nonlinear Airframe' */
   HAL_acquisition_t HAL_acquisition_t_g;/* '<S20>/Bus Creator4' */
   HAL_list_echo_t HAL_list_echo;       /* '<S31>/Bus Creator7' */
   HAL_list_echo_t HAL_list_echo_o;     /* '<S32>/Bus Creator7' */
@@ -338,7 +338,7 @@ typedef struct {
 /* Continuous states (default storage) */
 typedef struct {
   real_T Integrator_CSTATE[4];         /* '<S48>/Integrator' */
-  // X_nonlinearAirframe_n_T NonlinearAirframe_CSTATE;/* '<S1>/Nonlinear Airframe' */
+  X_nonlinearAirframe_n_T NonlinearAirframe_CSTATE;/* '<S1>/Nonlinear Airframe' */
 } X_asbQuadcopter_T;
 
 /* Periodic continuous state vector (global) */
@@ -348,13 +348,13 @@ typedef real_T PeriodicRngX_asbQuadcopter_T[14];
 /* State derivatives (default storage) */
 typedef struct {
   real_T Integrator_CSTATE[4];         /* '<S48>/Integrator' */
-  // XDot_nonlinearAirframe_n_T NonlinearAirframe_CSTATE;/* '<S1>/Nonlinear Airframe' */
+  XDot_nonlinearAirframe_n_T NonlinearAirframe_CSTATE;/* '<S1>/Nonlinear Airframe' */
 } XDot_asbQuadcopter_T;
 
 /* State disabled  */
 typedef struct {
   boolean_T Integrator_CSTATE[4];      /* '<S48>/Integrator' */
-  // XDis_nonlinearAirframe_n_T NonlinearAirframe_CSTATE;/* '<S1>/Nonlinear Airframe' */
+  XDis_nonlinearAirframe_n_T NonlinearAirframe_CSTATE;/* '<S1>/Nonlinear Airframe' */
 } XDis_asbQuadcopter_T;
 
 #ifndef ODE3_INTG
