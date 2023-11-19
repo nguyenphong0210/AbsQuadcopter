@@ -26,7 +26,7 @@ typedef struct {
   real_T speed_sound;
   real_T pressure;
   real_T air_density;
-} AtmosphereBus;
+} _AtmosphereBus;
 
 #endif
 
@@ -35,7 +35,7 @@ typedef struct {
 
 typedef struct {
   real_T Gravity_ned[3];
-  AtmosphereBus AtmosphereBus;
+  _AtmosphereBus AtmosphereBus;
   real_T MagneticField_ned[3];
 } EnvironmentBus;
 

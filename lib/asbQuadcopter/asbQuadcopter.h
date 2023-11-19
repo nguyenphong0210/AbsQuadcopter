@@ -30,7 +30,7 @@
 /* Child system includes */
 #define flightControlSystem_MDLREF_HIDE_CHILD_
 // #include "flightControlSystem.h"
-// #include "nonlinearAirframe.h"
+#include "nonlinearAirframe.h"
 #include "rt_assert.h"
 
 /* Macros for accessing real-time model data structure */
