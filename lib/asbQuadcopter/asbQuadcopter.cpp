@@ -836,7 +836,7 @@ void asbQuadcopter_step(void)
     /* End of BusCreator: '<S16>/Bus Creator1' */
 
     /* ModelReference: '<Root>/FCS' */
-    // flightControlSystem();
+    flightControlSystem();
   }
 
   /* End of Outputs for SubSystem: '<S4>/Sensors (Feedthrough)' */
@@ -1253,7 +1253,7 @@ void asbQuadcopter_initialize(void)
     &(asbQuadcopter_DW.NonlinearAirframe_InstanceData.rtm));
 
   /* Model Initialize function for ModelReference Block: '<Root>/FCS' */
-  // flightControlSystem_initialize(rtmGetErrorStatusPointer(asbQuadcopter_M));
+  flightControlSystem_initialize(rtmGetErrorStatusPointer(asbQuadcopter_M));
 
   /* Start for FromWorkspace: '<S12>/From Workspace' */
   {
@@ -1292,7 +1292,7 @@ void asbQuadcopter_initialize(void)
   /* End of SystemInitialize for SubSystem: '<S4>/Sensors (Feedthrough)' */
 
   /* SystemInitialize for ModelReference: '<Root>/FCS' */
-  // flightControlSystem_Init();
+  flightControlSystem_Init();
 
   /* SystemInitialize for ModelReference: '<S1>/Nonlinear Airframe' */
   nonlinearAirframe_Init(&(asbQuadcopter_X.NonlinearAirframe_CSTATE));

@@ -29,7 +29,7 @@
 
 /* Child system includes */
 #define flightControlSystem_MDLREF_HIDE_CHILD_
-// #include "flightControlSystem.h"
+#include "flightControlSystem.h"
 #include "nonlinearAirframe.h"
 #include "rt_assert.h"
 
