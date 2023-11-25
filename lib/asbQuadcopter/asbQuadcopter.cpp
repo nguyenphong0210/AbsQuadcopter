@@ -842,11 +842,11 @@ void asbQuadcopter_step(void)
   /* End of Outputs for SubSystem: '<S4>/Sensors (Feedthrough)' */
 
   /* ModelReference: '<S1>/Nonlinear Airframe' */
-  // nonlinearAirframe(&(asbQuadcopter_DW.NonlinearAirframe_InstanceData.rtm),
-  //                   &motors_outport[0], &asbQuadcopter_DW.BusCreator,
-  //                   &asbQuadcopter_DW.NonlinearAirframe,
-  //                   &(asbQuadcopter_DW.NonlinearAirframe_InstanceData.rtdw),
-  //                   &(asbQuadcopter_X.NonlinearAirframe_CSTATE));
+  nonlinearAirframe(&(asbQuadcopter_DW.NonlinearAirframe_InstanceData.rtm),
+                    &motors_outport[0], &asbQuadcopter_DW.BusCreator,
+                    &asbQuadcopter_DW.NonlinearAirframe,
+                    &(asbQuadcopter_DW.NonlinearAirframe_InstanceData.rtdw),
+                    &(asbQuadcopter_X.NonlinearAirframe_CSTATE));
 
   /* Gain: '<S52>/1//2' */
   rtb_Bias3 = 0.5 * asbQuadcopter_DW.NonlinearAirframe.Euler[0];
