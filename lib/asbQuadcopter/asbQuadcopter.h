@@ -20,6 +20,11 @@
 #include "rtwtypes.h"
 #include <math.h>
 #include <string.h>
+
+#include <Adafruit_MPU6050.h>
+#include <Adafruit_Sensor.h>
+#include <Wire.h>
+
 #ifndef asbQuadcopter_COMMON_INCLUDES_
 # define asbQuadcopter_COMMON_INCLUDES_
 #include "rtwtypes.h"
