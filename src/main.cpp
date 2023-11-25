@@ -1,6 +1,5 @@
 #include "asbQuadcopter.h"
 
-Adafruit_MPU6050 mpu;
 
 void setup(void) {
   Serial.begin(115200);

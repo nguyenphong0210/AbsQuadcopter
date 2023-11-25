@@ -44,7 +44,7 @@ SensorsBus sensor_inport;              /* '<S16>/Bus Creator1' */
 CommandBus cmd_inport;                 /* '<S7>/Bus Creator' */
 real32_T motors_outport[4];            /* '<Root>/FCS' */
 uint8_T flag_outport;                  /* '<Root>/FCS' */
-
+Adafruit_MPU6050 mpu;
 /* Continuous states */
 X_asbQuadcopter_T asbQuadcopter_X;
 
