@@ -1156,7 +1156,7 @@ void asbQuadcopter_step(void)
     }
 
     /* Update for ModelReference: '<S1>/Nonlinear Airframe' */
-    // nonlinearAirframe_Update();
+    nonlinearAirframe_Update();
   }                                    /* end MajorTimeStep */
 
   if (rtmIsMajorTimeStep(asbQuadcopter_M)) {
@@ -1199,9 +1199,9 @@ void asbQuadcopter_derivatives(void)
   _rtXdot->Integrator_CSTATE[3] = asbQuadcopter_DW.VisualizationGain[3];
 
   /* Derivatives for ModelReference: '<S1>/Nonlinear Airframe' */
-  // nonlinearAirframe_Deriv(&(asbQuadcopter_DW.NonlinearAirframe_InstanceData.rtdw),
-  //   &(((XDot_asbQuadcopter_T *) asbQuadcopter_M->derivs)
-  //     ->NonlinearAirframe_CSTATE));
+  nonlinearAirframe_Deriv(&(asbQuadcopter_DW.NonlinearAirframe_InstanceData.rtdw),
+    &(((XDot_asbQuadcopter_T *) asbQuadcopter_M->derivs)
+      ->NonlinearAirframe_CSTATE));
 }
 
 /* Model initialize function */
@@ -1248,9 +1248,9 @@ void asbQuadcopter_initialize(void)
   asbQuadcopter_M->Timing.stepSize0 = 0.005;
 
   /* Model Initialize function for ModelReference Block: '<S1>/Nonlinear Airframe' */
-  // nonlinearAirframe_initialize(rtmGetErrorStatusPointer(asbQuadcopter_M),
-  //   rtmGetStopRequestedPtr(asbQuadcopter_M), &(asbQuadcopter_M->solverInfo),
-  //   &(asbQuadcopter_DW.NonlinearAirframe_InstanceData.rtm));
+  nonlinearAirframe_initialize(rtmGetErrorStatusPointer(asbQuadcopter_M),
+    rtmGetStopRequestedPtr(asbQuadcopter_M), &(asbQuadcopter_M->solverInfo),
+    &(asbQuadcopter_DW.NonlinearAirframe_InstanceData.rtm));
 
   /* Model Initialize function for ModelReference Block: '<Root>/FCS' */
   // flightControlSystem_initialize(rtmGetErrorStatusPointer(asbQuadcopter_M));
@@ -1295,7 +1295,7 @@ void asbQuadcopter_initialize(void)
   // flightControlSystem_Init();
 
   /* SystemInitialize for ModelReference: '<S1>/Nonlinear Airframe' */
-  // nonlinearAirframe_Init(&(asbQuadcopter_X.NonlinearAirframe_CSTATE));
+  nonlinearAirframe_Init(&(asbQuadcopter_X.NonlinearAirframe_CSTATE));
 
   /* InitializeConditions for root-level periodic continuous states */
   {
