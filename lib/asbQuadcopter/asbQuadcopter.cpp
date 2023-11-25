@@ -45,6 +45,7 @@ CommandBus cmd_inport;                 /* '<S7>/Bus Creator' */
 real32_T motors_outport[4];            /* '<Root>/FCS' */
 uint8_T flag_outport;                  /* '<Root>/FCS' */
 Adafruit_MPU6050 mpu;
+sensors_event_t a, g, temp;
 /* Continuous states */
 X_asbQuadcopter_T asbQuadcopter_X;
 
@@ -191,10 +192,10 @@ static void rt_ertODEUpdateContinuousStates(RTWSolverInfo *si )
                        rtsiGetPeriodicContStateRanges(si));
   rtsiSetSimTimeStep(si,MAJOR_TIME_STEP);
 }
-
 /* Model step function */
 void asbQuadcopter_step(void)
 {
+  mpu.getEvent(&a, &g, &temp);
   /* local block i/o variables */
   real32_T rtb_YawPitchRoll[3];
   uint32_T rtb_FixPtSwitch;
@@ -708,9 +709,13 @@ void asbQuadcopter_step(void)
    *  Constant: '<S21>/temperature'
    *  DataTypeConversion: '<S19>/Data Type Conversion1'
    */
-  asbQuadcopter_DW.HAL_acquisition_t_g.HAL_acc_SI.x = asbQuadcopter_DW.Bias1[0];
-  asbQuadcopter_DW.HAL_acquisition_t_g.HAL_acc_SI.y = asbQuadcopter_DW.Bias1[1];
-  asbQuadcopter_DW.HAL_acquisition_t_g.HAL_acc_SI.z = asbQuadcopter_DW.Bias1[2];
+  // asbQuadcopter_DW.HAL_acquisition_t_g.HAL_acc_SI.x = asbQuadcopter_DW.Bias1[0];
+  // asbQuadcopter_DW.HAL_acquisition_t_g.HAL_acc_SI.y = asbQuadcopter_DW.Bias1[1];
+  // asbQuadcopter_DW.HAL_acquisition_t_g.HAL_acc_SI.z = asbQuadcopter_DW.Bias1[2];
+
+  asbQuadcopter_DW.HAL_acquisition_t_g.HAL_acc_SI.x = a.acceleration.x;
+  asbQuadcopter_DW.HAL_acquisition_t_g.HAL_acc_SI.y = a.acceleration.y;
+  asbQuadcopter_DW.HAL_acquisition_t_g.HAL_acc_SI.z = a.acceleration.z;
   asbQuadcopter_DW.HAL_acquisition_t_g.HAL_acc_SI.temperature = 0.0F;
 
   /* BusCreator generated from: '<S20>/Bus Creator4' incorporates:
@@ -718,9 +723,14 @@ void asbQuadcopter_step(void)
    *  Constant: '<S26>/temperature_lsb'
    *  DataTypeConversion: '<S19>/Data Type Conversion1'
    */
-  asbQuadcopter_DW.HAL_acquisition_t_g.HAL_gyro_SI.x = asbQuadcopter_DW.Bias2[0];
-  asbQuadcopter_DW.HAL_acquisition_t_g.HAL_gyro_SI.y = asbQuadcopter_DW.Bias2[1];
-  asbQuadcopter_DW.HAL_acquisition_t_g.HAL_gyro_SI.z = asbQuadcopter_DW.Bias2[2];
+  // asbQuadcopter_DW.HAL_acquisition_t_g.HAL_gyro_SI.x = asbQuadcopter_DW.Bias2[0];
+  // asbQuadcopter_DW.HAL_acquisition_t_g.HAL_gyro_SI.y = asbQuadcopter_DW.Bias2[1];
+  // asbQuadcopter_DW.HAL_acquisition_t_g.HAL_gyro_SI.z = asbQuadcopter_DW.Bias2[2];
+
+  asbQuadcopter_DW.HAL_acquisition_t_g.HAL_gyro_SI.x = g.gyro.x;
+  asbQuadcopter_DW.HAL_acquisition_t_g.HAL_gyro_SI.y = g.gyro.y;
+  asbQuadcopter_DW.HAL_acquisition_t_g.HAL_gyro_SI.z = g.gyro.z;
+
   asbQuadcopter_DW.HAL_acquisition_t_g.HAL_gyro_SI.temperature = 0.0F;
   asbQuadcopter_DW.HAL_acquisition_t_g.HAL_gyro_SI.temperature_lsb = 0;
   if (rtmIsMajorTimeStep(asbQuadcopter_M) &&
@@ -1314,6 +1324,24 @@ void asbQuadcopter_initialize(void)
     (void) memcpy((void*)asbQuadcopter_PeriodicRngX, rootPeriodicContStateRanges,
                   14*sizeof(real_T));
   }
+
+  // Try to initialize!
+  if (!mpu.begin()) {
+    Serial.println("Failed to find MPU6050 chip");
+    while (1) {
+      delay(10);
+    }
+  }
+  Serial.println("MPU6050 Found!");
+
+  //setupt motion detection
+  mpu.setHighPassFilter(MPU6050_HIGHPASS_0_63_HZ);
+  mpu.setMotionDetectionThreshold(1);
+  mpu.setMotionDetectionDuration(20);
+  mpu.setInterruptPinLatch(true);	// Keep it latched.  Will turn off when reinitialized.
+  mpu.setInterruptPinPolarity(true);
+  mpu.setMotionInterrupt(true);
+
 }
 
 /*

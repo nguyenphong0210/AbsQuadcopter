@@ -1,6 +1,5 @@
 #include "asbQuadcopter.h"
 
-
 void setup(void) {
   Serial.begin(115200);
   asbQuadcopter_initialize();
