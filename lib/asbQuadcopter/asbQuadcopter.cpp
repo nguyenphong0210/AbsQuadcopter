@@ -585,22 +585,22 @@ void asbQuadcopter_step(void)
        *  Product: '<S19>/Product'
        *  Sum: '<S19>/Sum'
        */
-      asbQuadcopter_DW.Bias1[i] = (real32_T)
-        (asbQuadcopter_DW.Memory_PreviousInput.Accel_body[i] -
-         ((asbQuadcopter_DW.Memory_PreviousInput.DCM_be[i + 3] *
-           asbQuadcopter_DW.BusCreator.Gravity_ned[1] +
-           asbQuadcopter_DW.Memory_PreviousInput.DCM_be[i] *
-           asbQuadcopter_DW.BusCreator.Gravity_ned[0]) +
-          asbQuadcopter_DW.Memory_PreviousInput.DCM_be[i + 6] *
-          asbQuadcopter_DW.BusCreator.Gravity_ned[2])) + rtCP_Bias1_Bias_a[i];
+      // asbQuadcopter_DW.Bias1[i] = (real32_T)
+      //   (asbQuadcopter_DW.Memory_PreviousInput.Accel_body[i] -
+      //    ((asbQuadcopter_DW.Memory_PreviousInput.DCM_be[i + 3] *
+      //      asbQuadcopter_DW.BusCreator.Gravity_ned[1] +
+      //      asbQuadcopter_DW.Memory_PreviousInput.DCM_be[i] *
+      //      asbQuadcopter_DW.BusCreator.Gravity_ned[0]) +
+      //     asbQuadcopter_DW.Memory_PreviousInput.DCM_be[i + 6] *
+      //     asbQuadcopter_DW.BusCreator.Gravity_ned[2])) + rtCP_Bias1_Bias_a[i];
 
       /* Bias: '<S19>/Bias2' incorporates:
        *  DataTypeConversion: '<S19>/Data Type Conversion2'
        *  Memory: '<S16>/Memory'
        */
-      asbQuadcopter_DW.Bias2[i] = (real32_T)
-        asbQuadcopter_DW.Memory_PreviousInput.Omega_body[i] +
-        rtCP_Bias2_Bias_i[i];
+      // asbQuadcopter_DW.Bias2[i] = (real32_T)
+      //   asbQuadcopter_DW.Memory_PreviousInput.Omega_body[i] +
+      //   rtCP_Bias2_Bias_i[i];
     }
 
     /* Saturate: '<S19>/Saturation' incorporates:
